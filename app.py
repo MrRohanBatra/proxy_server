@@ -2,7 +2,7 @@ import requests
 from tabulate import tabulate
 
 def main():
-    url = "http://127.0.0.1:3000"
+    url = "https://proxy-server-n8mt.onrender.com/"
     payload = {
         "name": "23104056",
         "pass": "R0hanbatra@16072005"

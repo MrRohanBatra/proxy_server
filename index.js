@@ -1,6 +1,12 @@
 import express from "express";
 import { WebPortal } from "jsjiit";
 import crypto from "crypto";
+import path from "path";
+import { fileURLToPath } from "url";
+
+// ✅ Fix __dirname in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // ✅ Minimal shim for browser APIs (needed because jsjiit is browser-oriented)
 if (typeof global.window === "undefined") global.window = {};
@@ -14,6 +20,12 @@ if (!global.window.crypto) {
 const app = express();
 app.use(express.json());
 
+// ✅ Serve index.html
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "index.html"));
+});
+
+// ✅ Attendance endpoint
 app.post("/", async (req, res) => {
     try {
         const { name, pass } = req.body;
